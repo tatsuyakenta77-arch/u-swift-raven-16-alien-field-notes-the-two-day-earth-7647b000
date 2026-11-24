@@ -35,8 +35,9 @@ const outDir = process.env.MAKEFUN_OUTPUT_DIR ?? "/output";
 // The gate allows 1–200 characters of UTF-8 text, not only
 // whitespace, on a single line — so the code enforces the shape
 // too: one line, inside the limit, no leading or trailing space.
-if (line.length < 1 || line.length > 200) {
-  throw new Error(`entry line is ${line.length} characters, outside the 1-200 limit`);
+const MAX_CHARS = 200;
+if (line.length < 1 || line.length > MAX_CHARS) {
+  throw new Error(`entry line is ${line.length} characters, outside the 1-${MAX_CHARS} limit`);
 }
 if (line.trim().length === 0 || /[\r\n]/.test(line)) {
   throw new Error("entry line must be one non-blank line");
